@@ -14,7 +14,6 @@ if (isset($_POST['login'])) {
   }
 }
 ?>
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
