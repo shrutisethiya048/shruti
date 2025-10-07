@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student Marksheet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="text-center text-primary mb-4">📘 Student Marksheet</h2>
+    
+    <form onsubmit="return result()" onreset="clearResult()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Student Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="english" class="form-label">English:</label>
+        <input type="number" class="form-control" id="english" placeholder="Enter English Marks" required min="0" max="100">
+      </div>
+
+      <div class="mb-3">
+        <label for="hindi" class="form-label">Hindi:</label>
+        <input type="number" class="form-control" id="hindi" placeholder="Enter Hindi Marks" required min="0" max="100">
+      </div>
+
+      <div class="mb-3">
+        <label for="cs" class="form-label">Computer Science:</label>
+        <input type="number" class="form-control" id="cs" placeholder="Enter Computer Science Marks" required min="0" max="100">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success">Calculate Result</button>
+        <button type="reset" class="btn btn-danger ms-2">Reset</button>
+      </div>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Result Section -->
+    <div id="result" class="text-center">
+      <h4 id="studentName" class="text-secondary"></h4>
+      <h5 id="total" class="text-dark"></h5>
+      <h5 id="per" class="text-dark"></h5>
+      <h5 id="grade" class="fw-bold"></h5>
+    </div>
+  </div>
+</div>
+
+<script>
+function result(){
+  // Get input values
+  let name = document.getElementById("name").value;
+  let english = parseFloat(document.getElementById("english").value);
+  let hindi = parseFloat(document.getElementById("hindi").value);
+  let cs = parseFloat(document.getElementById("cs").value);
+
+  // Calculate total & percentage
+  let total = english + hindi + cs;
+  let per = (total * 100) / 300;
+
+  // Display results
+  document.getElementById("studentName").innerText = "Student Name: " + name;
+  document.getElementById("total").innerText = "Total Marks: " + total;
+  document.getElementById("per").innerText = "Percentage: " + per.toFixed(2) + "%";
+
+  // Grade system
+  let gradeText = document.getElementById("grade");
+  if (per >= 90) {
+    gradeText.innerText = "Grade: A";
+    gradeText.style.color = "green";
+  } else if (per >= 70) {
+    gradeText.innerText = "Grade: B";
+    gradeText.style.color = "blue";
+  } else if (per >= 50) {
+    gradeText.innerText = "Grade: C";
+    gradeText.style.color = "orange";
+  } else {
+    gradeText.innerText = "Grade: Fail";
+    gradeText.style.color = "red";
+	alert("Unfortunately, you have failed. Better luck next time!");
+  }
+   alert("Result Calculated Successfully!");
+  return false; // Prevent form reload
+}
+
+function clearResult() {
+  // Clear result when reset button is clicked
+  document.getElementById("studentName").innerText = "";
+  document.getElementById("total").innerText = "";
+  document.getElementById("per").innerText = "";
+  document.getElementById("grade").innerText = "";
+}
+</script>
+</body>
+</html>
