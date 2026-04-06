@@ -1,6 +1,6 @@
 <?php
 // Database Connection
-$conn = mysqli_connect("localhost", "root", "", "admin_panel");
+$conn = mysqli_connect("localhost", "root", "", "your_database_name");
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
@@ -91,12 +91,7 @@ if(isset($_SESSION['cart'])){
   <div class="text-center">
     <a href="shop.php" class="btn btn-primary mt-3">View All Products</a>
   </div>
-</div>
-
-<!-- Footer -->
-<footer class="bg-light text-center mt-5 py-3">
-  <p>© 2025 Beauty Shop | Designed by Shruti Jain</p>
-</footer>
-
+</div
 </body>
 </html>
+<?php include("footer.php"); ?>

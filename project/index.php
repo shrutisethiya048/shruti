@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Database Connection
 $conn = mysqli_connect("localhost", "root", "", "admin_panel");
 if (!$conn) {
@@ -62,7 +61,6 @@ if(isset($_SESSION['cart'])){
 <div class="container mt-4">
   <h2 class="mb-4 text-center">🛍 Products</h2>
   <div class="row">
-    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
       <div class="col-md-4">
         <div class="product-card">
           <img src="img/<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>" class="product-img">
@@ -80,7 +78,6 @@ if(isset($_SESSION['cart'])){
 
         </div>
       </div>
-    <?php } ?>
   </div>
 </div>
 

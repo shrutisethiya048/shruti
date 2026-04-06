@@ -1,4 +1,5 @@
 <?php
+session_start(); // ✅ Important: Start session first
 include("config.php");
 
 // Check product id
@@ -7,7 +8,7 @@ $id = intval($_GET['id']);
 
 // Fetch product
 $result = mysqli_query($conn, "SELECT * FROM products WHERE id=$id LIMIT 1");
-if (!$result || mysqli_num_rows($result)==0) die("Product not found!");
+if (!$result || mysqli_num_rows($result) == 0) die("Product not found!");
 $product = mysqli_fetch_assoc($result);
 
 // Initialize cart
@@ -22,12 +23,13 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][$id]['item_quantity'] += $quantity;
     } else {
         $_SESSION['cart'][$id] = [
-            'item_name' => $product['name'],
-            'item_price' => $product['price'],
+            'item_name'     => $product['name'],
+            'item_price'    => $product['price'],
             'item_quantity' => $quantity,
-            'item_image' => $product['image']
+            'item_image'    => $product['image']
         ];
     }
+
     header("Location: cart.php");
     exit();
 }
@@ -51,11 +53,13 @@ foreach ($_SESSION['cart'] as $item) $total_items += $item['item_quantity'];
 <div class="container mt-5">
 <div class="product-detail row">
     <div class="col-md-6">
-        <img src="assets/images/products/<?= $product['image'] ?>" class="product-img" alt="<?= htmlspecialchars($product['name']) ?>">
+        <img src="assets/images/products/<?= htmlspecialchars($product['image']) ?>" 
+             class="product-img" 
+             alt="<?= htmlspecialchars($product['name']) ?>">
     </div>
     <div class="col-md-6">
         <h2><?= htmlspecialchars($product['name']) ?></h2>
-        <h4>Price: ₹<?= $product['price'] ?></h4>
+        <h4>Price: ₹<?= htmlspecialchars($product['price']) ?></h4>
         <p><?= !empty($product['description']) ? htmlspecialchars($product['description']) : "No description available."; ?></p>
 
         <form method="post">
@@ -71,3 +75,4 @@ foreach ($_SESSION['cart'] as $item) $total_items += $item['item_quantity'];
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

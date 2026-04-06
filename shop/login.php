@@ -30,7 +30,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         // Check plain text password
         if($user->password === $password){
             // Check if user is blocked
-            if($user->status === "Block"){
+            if($user->status === "blocked"){
                 $message = "⚠️ Your account is blocked. Contact admin.";
             } else {
                 // Set session
@@ -40,7 +40,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['u_status'] = $user->status;
 
                 // Redirect
-                echo "<script>alert('Login Successful'); window.location='index.php';</script>";
+                echo "<script>alert('Login Successful'); window.location='home.php';</script>";
                 exit;
             }
         } else {
@@ -58,14 +58,20 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 <meta charset="UTF-8">
 <title>Login - Beauty Shop</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body {
     background: #f4f4f4;
-    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.login-wrapper {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Segoe UI', sans-serif;
 }
 .login-card {
     background: #fff;
@@ -94,6 +100,7 @@ body {
     color: white;
     font-weight: bold;
     width: 100%;
+    transition: 0.3s;
 }
 .btn-custom:hover {
     background: linear-gradient(135deg, #ff5f7e, #ff4a91);
@@ -113,23 +120,27 @@ a {
 </head>
 <body>
 
-<div class="login-card">
-    <h3>Login</h3>
+<div class="login-wrapper">
+  <div class="login-card">
+      <h3>Login</h3>
 
-    <?php if($message !== ''): ?>
-        <div class="alert alert-danger"><?= $message ?></div>
-    <?php endif; ?>
+      <?php if($message !== ''): ?>
+          <div class="alert alert-danger"><?= $message ?></div>
+      <?php endif; ?>
 
-    <form method="POST">
-        <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
-        <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
-        <button type="submit" class="btn btn-custom">Login</button>
-    </form>
+      <form method="POST">
+          <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+          <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+          <button type="submit" class="btn btn-custom">Login</button>
+      </form>
 
-    <p class="text-center mt-3">
-        Don’t have an account? <a href="registration.php">Register Now</a>
-    </p>
+      <p class="text-center mt-3">
+          Don’t have an account? <a href="registration.php">Register Now</a>
+      </p>
+  </div>
 </div>
+
+<?php include("footer.php"); ?>
 
 </body>
 </html>

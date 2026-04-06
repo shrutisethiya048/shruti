@@ -13,7 +13,7 @@ class control extends model
 
         switch ($url) {
 
-            //  LOGIN 
+            //  LOGIN 				
             case '/authentication-login':
                 if (isset($_POST['submit'])) {
                     $username = $_POST['username'];
@@ -33,15 +33,15 @@ class control extends model
 
                         echo "<script>
                             alert('Login success');
-                            window.location='dashboard';
+                            window.location='home';
                         </script>";
-                        exit;
+                       
                     } else {
                         echo "<script>
                             alert('Login failed, wrong credentials');
                             window.location='authentication-login';
                         </script>";
-                        exit;
+                        
                     }
                 } else {
                     include("admin_login.php"); // login form file

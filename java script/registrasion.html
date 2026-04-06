@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        width: 350px;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 6px 0 2px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    span {
+        color: red;
+        font-size: 12px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<form onsubmit="return validateForm(this)">
+    <h2 style="text-align:center;">Registration Form</h2>
+
+    <label>Full Name:</label>
+    <input type="text" name="fullname">
+    <span id="nameError"></span>
+
+    <label>Email:</label>
+    <input type="text" name="email">
+    <span id="emailError"></span>
+
+    <label>Password:</label>
+    <input type="password" name="password">
+    <span id="passError"></span>
+
+    <label>Confirm Password:</label>
+    <input type="password" name="cpassword">
+    <span id="cpassError"></span>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+function validateForm(form){
+    let isValid = true;
+
+    // Clear previous errors
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("passError").innerHTML = "";
+    document.getElementById("cpassError").innerHTML = "";
+
+    // Full Name Validation
+    if(form.fullname.value.trim() === ""){
+        document.getElementById("nameError").innerHTML = "Full Name is required";
+        form.fullname.focus();
+        return false;
+    }
+
+    // Email Validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if(form.email.value.trim() === ""){
+        document.getElementById("emailError").innerHTML = "Email is required";
+        form.email.focus();
+        return false;
+    } else if(!emailPattern.test(form.email.value.trim())){
+        document.getElementById("emailError").innerHTML = "Enter a valid email";
+        form.email.focus();
+        return false;
+    }
+
+    // Password Validation
+    if(form.password.value === ""){
+        document.getElementById("passError").innerHTML = "Password is required";
+        form.password.focus();
+        return false;
+    } else if(form.password.value.length < 6){
+        document.getElementById("passError").innerHTML = "Password must be at least 6 characters";
+        form.password.focus();
+        return false;
+    }
+
+    // Confirm Password Validation
+    if(form.cpassword.value === ""){
+        document.getElementById("cpassError").innerHTML = "Confirm your password";
+        form.cpassword.focus();
+        return false;
+    } else if(form.password.value !== form.cpassword.value){
+        document.getElementById("cpassError").innerHTML = "Passwords do not match";
+        form.cpassword.focus();
+        return false;
+    }
+
+    alert("Registration Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>

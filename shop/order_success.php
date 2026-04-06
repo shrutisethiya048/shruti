@@ -4,7 +4,6 @@ if(empty($_SESSION['cart'])) {
     header("Location: index.php");
     exit();
 }
-
 unset($_SESSION['cart']); // 
 ?>
 
@@ -23,3 +22,4 @@ unset($_SESSION['cart']); //
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

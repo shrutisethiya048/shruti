@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Check if admin is logged in
 if(!isset($_SESSION['admin'])){
     header("Location: authentication-login.php");
@@ -33,6 +32,8 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <title>Add Category</title>
+
+    <!-- Existing CSS -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -48,47 +49,38 @@ if(isset($_POST['submit'])){
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
         input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0 15px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 100%; padding: 10px; margin: 8px 0 15px 0;
+            border: 1px solid #ccc; border-radius: 5px;
         }
-        textarea {
-            resize: none;
-        }
+        textarea { resize: none; }
         .btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
+            background-color: #28a745; color: #fff; padding: 10px 15px;
+            border: none; border-radius: 6px; cursor: pointer; transition: 0.3s;
         }
-        .btn:hover {
-            background-color: #218838;
-        }
-        .message {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 6px;
-        }
+        .btn:hover { background-color: #218838; }
+        .message { margin-bottom: 15px; padding: 10px; border-radius: 6px; }
         .error { background-color: #f8d7da; color: #721c24; }
         .success { background-color: #d4edda; color: #155724; }
-        a.back {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #007bff;
-        }
+        a.back { display: inline-block; margin-top: 10px; text-decoration: none; color: #007bff; }
     </style>
+
+    <!-- ✅ 1. jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ✅ 2. DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- ✅ 3. DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Initialize DataTable (optional) -->
+    <script>
+        $(document).ready(function() {
+            $('#mytable').DataTable();
+        });
+    </script>
 </head>
 <body>
     <div class="container">

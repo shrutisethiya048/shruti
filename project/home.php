@@ -58,13 +58,13 @@ if(isset($_SESSION['cart'])){
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="index.php">Beauty Shop</a>
   <div>
-    <a href="shop.php" class="btn btn-outline-success mr-2">Shop</a>
-    <a href="cart.php" class="btn btn-outline-primary mr-2">
+    <a href="shop" class="btn btn-outline-success mr-2">Shop</a>
+    <a href="cart" class="btn btn-outline-primary mr-2">
       Cart (<?php echo $total_items; ?>)
     </a>
-    <a href="registration.php" class="btn btn-outline-secondary mr-2">Registration</a>
-    <a href="login.php" class="btn btn-outline-dark">Login</a>
-    <a href="contact.php" class="btn btn-info ml-2">Contact</a>
+    <a href="registration" class="btn btn-outline-secondary mr-2">Registration</a>
+    <a href="login" class="btn btn-outline-dark">Login</a>
+    <a href="contact" class="btn btn-info ml-2">Contact</a>
   </div>
 </nav>
 
@@ -89,14 +89,7 @@ if(isset($_SESSION['cart'])){
     <?php } ?>
   </div>
   <div class="text-center">
-    <a href="shop.php" class="btn btn-primary mt-3">View All Products</a>
+    <a href="shop" class="btn btn-primary mt-3">View All Products</a>
   </div>
 </div>
-
-<!-- Footer -->
-<footer class="bg-light text-center mt-5 py-3">
-  <p>© 2025 Beauty Shop | Designed by Shruti Jain</p>
-</footer>
-
-</body>
-</html>
+<?php include("footer.php"); ?>

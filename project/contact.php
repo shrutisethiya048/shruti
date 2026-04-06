@@ -1,8 +1,6 @@
 <?php
 session_start(); // Must be on top
-include("header.php");
 ?>
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 <link rel="stylesheet" href="contact.css" />
 
@@ -20,7 +18,6 @@ include("header.php");
         unset($_SESSION['error']);
     }
     ?>
-
     <form action="contact_process.php" method="post">
         <div class="form-group mb-3">
             <input type="text" name="name" class="form-control" placeholder="Your Name" required>
@@ -34,5 +31,3 @@ include("header.php");
         <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
 </div>
-
-<?php include("footer.php"); ?>

@@ -1,8 +1,10 @@
 <?php
-// Database connection
-$conn = mysqli_connect("localhost", "root", "", "your_database_name");
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Check connection
+$conn = mysqli_connect("localhost", "root", "", "admin_panel");
+
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }

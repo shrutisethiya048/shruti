@@ -1,0 +1,60 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<script>
+$(document).ready(function(){
+	$(".mybtn").click(function(){
+		$("p").hide();
+	})
+	$(".btn1").click(function(){
+	$(".myclass").hide()
+	})
+	$("#btn2").click(function(){
+		$("#myid").hide()
+	})
+	
+	$("#btn3").click(function(){
+		$(this).hide()
+	})
+	
+ });
+</script>
+<p>Hi how are you</p>
+
+<p>Hi how are you</p>
+<p>Hi how are you</p>
+<p>Hi how are you</p>
+<p>Hi how are you</p>
+<button class="mybtn"> Hide Element </button>
+<br>
+<br>
+<div class="myclass">
+What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and 
+typesetting industry. Lorem Ipsum has been the 
+industry's standard dummy text eve
+</div>
+<button class="btn1">Hide Class</button>
+<br>
+<br>
+
+
+<div id="myid">
+
+What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and 
+typesetting industry. Lorem Ipsum has been the 
+industry's standard dummy text eve
+</div>
+<button id="btn2">Hide ID</button>
+</div>
+<br>
+
+<button id="btn3">Hide this</button>
+
+</body>
+</html>

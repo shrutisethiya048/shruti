@@ -1,6 +1,5 @@
 <?php
 include("config.php");
-
 // Fetch unique categories
 $cat_sql = "SELECT DISTINCT category FROM products ORDER BY category ASC";
 $cat_result = mysqli_query($conn, $cat_sql);
@@ -79,3 +78,4 @@ $cat_result = mysqli_query($conn, $cat_sql);
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

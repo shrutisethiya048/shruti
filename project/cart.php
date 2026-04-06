@@ -1,7 +1,4 @@
 <?php
-session_start();
-
-// ================== ADD TO CART ==================
 if (isset($_GET['action']) && $_GET['action'] == "add") {
     $id = $_GET['id'];
     $name = $_POST['hidden_name'];
@@ -9,7 +6,6 @@ if (isset($_GET['action']) && $_GET['action'] == "add") {
     $image = $_POST['hidden_image'];
     $quantity = $_POST['quantity'];
 
-    // Agar cart already exist karta hai
     if (isset($_SESSION['cart'][$id])) {
         $_SESSION['cart'][$id]['item_quantity'] += $quantity;
     } else {
@@ -21,8 +17,7 @@ if (isset($_GET['action']) && $_GET['action'] == "add") {
         );
     }
 }
-
-// ================== REMOVE ITEM ==================
+<?php include("footer.php"); ?>
 if (isset($_GET['action']) && $_GET['action'] == "remove") {
     $id = $_GET['id'];
     unset($_SESSION['cart'][$id]);
@@ -90,8 +85,9 @@ if (isset($_GET['action']) && $_GET['action'] == "remove") {
         </tbody>
     </table>
 
-    <a href="shop.php" class="btn btn-primary">Continue Shopping</a>
-    <a href="checkout.php" class="btn btn-success">Checkout</a>
+    <a href="shop" class="btn btn-primary">Continue Shopping</a>
+    <a href="checkout" class="btn btn-success">Checkout</a>
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

@@ -33,13 +33,20 @@ $categories_arr = $conn->query($sql);
     .delete-btn {background-color:#dc3545;}
     .delete-btn:hover {background-color:#c82333;}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#categoriesTable').DataTable();      
+});
+</script>
 </head>
 <body>
 <div class="container">
     <h1>Manage Categories</h1>
     <a href="add_category.php" class="add-btn">+ Add Category</a>
-
-    <table>
+    <table id="categoriesTable">
         <thead>
             <tr>
                 <th>ID</th>

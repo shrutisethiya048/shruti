@@ -1,7 +1,6 @@
 <?php
 class model {
     public $conn;
-
     // Constructor - Database connection
     function __construct() {
         $this->conn = new mysqli('localhost','root','','admin_panel');

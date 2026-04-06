@@ -92,3 +92,4 @@ if (empty($_SESSION['cart'])) {
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

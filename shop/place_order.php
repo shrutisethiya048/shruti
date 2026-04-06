@@ -1,36 +1,53 @@
 <?php
-$conn = mysqli_connect("localhost","root","","admin_panel");
+session_start();
+// Database Connection
+$conn = mysqli_connect("localhost", "root", "", "admin_panel");
+if (!$conn) {
+    die(" Database Connection Failed: " . mysqli_connect_error());
+}
 
-if(!$conn) die("DB Connection failed: ".mysqli_connect_error());
+$success = ""; // Message
 
-$success = ''; // Message to show
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if($_SERVER['REQUEST_METHOD']=='POST' && !empty($_SESSION['cart'])){
+    //  Check if cart is empty
+    if (empty($_SESSION['cart'])) {
+        $success = " Your cart is empty!";
+    } else {
+        //  Collect form data safely
+        $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+        $address  = mysqli_real_escape_string($conn, $_POST['address']);
+        $payment  = mysqli_real_escape_string($conn, $_POST['payment']);
+        $grand_total = floatval($_POST['total_amount']);
 
-    $fullname = $_POST['fullname'];
-    $address  = $_POST['address'];
-    $payment  = $_POST['payment'];
-    $grand_total = $_POST['total_amount'];
+        $insertError = false;
 
-    foreach($_SESSION['cart'] as $item){
-        $pname    = $item['item_name'];
-        $qty      = $item['item_quantity'];
-        $price    = $item['item_price'];
-        $status   = "Pending";
-        $created  = date("Y-m-d H:i:s");
+        // ✅ Insert each cart item as separate order
+        foreach ($_SESSION['cart'] as $item) {
+            $pname   = mysqli_real_escape_string($conn, $item['item_name']);
+            $qty     = intval($item['item_quantity']);
+            $price   = floatval($item['item_price']);
+            $status  = "Pending";
+            $created = date("Y-m-d H:i:s");
 
-        $sql = "INSERT INTO orders
-        (customer_name, product_name, quantity, price, status, created_at, shipping_address, billing_address)
-        VALUES
-        ('$fullname','$pname',$qty,$price,'$status','$created','$address','$address')";
+            $sql = "INSERT INTO orders 
+                    (customer_name, product_name, quantity, price, total_amount, status, payment_method, shipping_address, billing_address, created_at)
+                    VALUES 
+                    ('$fullname', '$pname', $qty, $price, $grand_total, '$status', '$payment', '$address', '$address', '$created')";
 
-        if(!mysqli_query($conn,$sql)){
-            $success = "❌ Insert Error: ".mysqli_error($conn);
+            if (!mysqli_query($conn, $sql)) {
+                $insertError = true;
+                $success = " Insert Error: " . mysqli_error($conn);
+                break;
+            }
+        }
+
+        // If no errors → clear cart & show success
+        if (!$insertError) {
+            unset($_SESSION['cart']);
+            $success = "🎉 Your order has been placed successfully!";
         }
     }
-
-    unset($_SESSION['cart']);
-    if($success=='') $success = "🎉 Your order has been placed successfully!";
 }
 ?>
 
@@ -45,12 +62,12 @@ body {
     background: #f0f2f5;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
     min-height: 100vh;
 }
 .message-box {
-    text-align: center;
+    text-align:center;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0px 6px 15px rgba(0,0,0,0.1);
@@ -85,6 +102,5 @@ body {
     <h3><?= htmlspecialchars($success) ?></h3>
     <a href="shop.php" class="btn-custom">Continue Shopping 🛍</a>
 </div>
-
 </body>
 </html>

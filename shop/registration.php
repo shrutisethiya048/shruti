@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 // Database connection
 $conn = mysqli_connect("localhost", "root", "", "your_database_name");
 if (!$conn) {
@@ -117,3 +115,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+<?php include("footer.php"); ?>
