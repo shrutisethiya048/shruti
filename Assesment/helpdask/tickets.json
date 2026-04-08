@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "title": "sss",
+        "status": "Closed",
+        "assigned_to": "ss",
+        "date": "2026-04-08"
+    },
+    {
+        "id": 2,
+        "title": "Bug issue",
+        "status": "Closed",
+        "assigned_to": "Backend Developer",
+        "date": "2026-04-08"
+    }
+]
